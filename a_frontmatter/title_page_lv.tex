@@ -1,0 +1,41 @@
+% frontmatter/title_page_lv.tex
+\thispagestyle{empty}
+
+% --- Top-left wide logo ---
+\noindent
+\includegraphics[width=\rnulogowidth]{\rnulogopath}
+
+\vspace{6mm}
+
+% --- One line: left label, right programme ---
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+  {\bfseries\fontsize{12pt}{12pt}\selectfont Studiju programma} &
+  {\bfseries\fontsize{12pt}{12pt}\selectfont \studyprogrammeLV} \\
+\end{tabular*}
+
+\vspace{8mm}
+
+% --- Centered department ---
+\begin{center}
+  {\bfseries\fontsize{16pt}{16pt}\selectfont \departmentLV}
+\end{center}
+
+\vspace{10mm}
+
+% --- Main centered block: ISMA name + Title + work type + meta ---
+\begin{center}
+  {\Large RĪGAS ZIEMEĻVALSTU UNIVERSITĀTE}\\[2mm]
+  {\Large (RNU)}\\[8mm]
+
+  {\bfseries\fontsize{16pt}{16pt}\selectfont \thesistitleLV}\\[10mm]
+  {\bfseries\large BAKALAURA DARBS}\\[18mm]
+
+  \begin{tabular}{@{}p{6cm}p{8cm}@{}}
+    Students:& \studentnameLV\\[2mm]
+    Darba vadītājs:& \supervisornameLV\\
+  \end{tabular}
+
+  \vfill
+  {\thesiscityLV\ \thesisyear}
+\end{center}
+

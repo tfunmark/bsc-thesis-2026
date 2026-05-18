@@ -1,0 +1,123 @@
+\chapter{Literature Review and Theoretical Background}
+\label{chap:litreview}
+
+% --- Purpose (for students) ---
+% This chapter defines key concepts, surveys related work, and sets the theoretical lens.
+% It must end by motivating the research direction and articulating the concrete gap your thesis fills.
+
+\section{Core Concepts and Definitions}
+\label{sec:concepts}
+Introduce the foundational terms your thesis relies on using authoritative sources, e.g., \cite{porter2008,laudon2015}. Define each term exactly once and use it consistently throughout the thesis. Prefer primary definitions where possible; when multiple definitions exist, present the variants and justify your chosen convention.
+
+Inline emphasis: \emph{italics}, \textbf{bold}. Use \verb|\enquote{...}| (from \texttt{csquotes}) for quotations, e.g., \enquote{quoted text}. Use \verb|\url{...}| for clickable links such as \url{https://ctan.org}.
+
+\paragraph{Citation tip.}
+With \texttt{biblatex} (IEEE style in this project), numeric citations use \verb|\cite{...}|.\footnote{Place the citation after punctuation when it references a full sentence.} Group multiple sources as needed, e.g., \cite{friedman2006,schmidt2014}.
+
+\section{Related Work: Themes, Methods, and Evidence}
+\label{sec:related}
+Organize prior work by coherent themes (theory, methods, application domains) or chronology. For each theme, summarize the central idea, typical assumptions, evaluation protocols, and reported limitations. Contrast strands rather than listing them.
+
+\begin{itemize}[leftmargin=1.2cm]
+  \item \textbf{Approach A (theory-driven).} Outline core mechanisms, typical datasets, and where this approach excels; note constraints or external validity issues \cite{friedman2006}.
+  \item \textbf{Approach B (data-driven/practice-oriented).} Contrast assumptions and deployment costs with Approach A; highlight reproducibility and measurement issues \cite{laudon2015}.
+  \item \textbf{Approach C (hybrid/emerging).} Summarize integration points and remaining open problems \cite{schmidt2014}.
+\end{itemize}
+
+When referring to figures, tables, algorithms, or listings, always use labels + \verb|\cref| (e.g., \cref{fig:example-figure,tab:example-table,alg:example,lst:snippet}).
+
+% ---- Figure example (caption under figure; centered by class) ----
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\linewidth]{b_chapters/chapter1/assets/RNU_large_logo.png}
+  \figsource{Author-created illustration (replace with your own figure and source).}
+  \caption{Example figure: a conceptual taxonomy (replace with your content).}
+  \label{fig:example-figure}
+\end{figure}
+
+% ---- Table example (caption above; ragged-right by class) ----
+{\singlespacing
+\begin{table}[h]
+  \caption{Comparison matrix (replace with your synthesis)}
+  \label{tab:example-table}
+  \centering
+  \begin{tabular}{lrrr}
+    \toprule
+    Criterion            & Method A & Method B & Method C\\
+    \midrule
+    Accuracy (avg)       & 0.82     & 0.79     & 0.84\\
+    Cost (relative)      & High     & Medium   & Low\\
+    Data requirement     & Large    & Medium   & Small\\
+    \bottomrule
+  \end{tabular}
+
+  \vspace{2mm}
+  \emph{Note:} Replace placeholders with your evidence; include units and sources.
+\end{table}
+}
+
+\section{Theoretical Framework}
+\label{sec:theory}
+State the theoretical lens or formal model that grounds your work. Define variables and relationships precisely, and connect assumptions to the context of your thesis. Keep derivations concise; move long proofs to an appendix.
+
+\begin{align}
+  \label{eq:objective}
+  J(\theta) &= \mathbb{E}_{(x,y)\sim \mathcal{D}} \bigl[\, \ell(f_\theta(x),\, y)\, \bigr] \, ,
+\end{align}
+
+where $\ell$ is the loss aligned to your evaluation criterion and $f_\theta$ the model or rule under study. Reference important equations with \verb|\cref|, e.g., \cref{eq:objective}.
+
+% ---- Algorithm (float + pseudocode) example ----
+\begin{algorithm}[h]
+\caption{Generic greedy selection (template — adapt to your context)}
+\begin{algorithmic}[1]
+  \State Initialize solution $S \gets \emptyset$
+  \While{a feasible choice exists}
+    \State choose the best feasible item $x$ according to criterion $C$
+    \State $S \gets S \cup \{x\}$
+  \EndWhile
+  \State \Return $S$
+\end{algorithmic}
+\label{alg:example}
+\end{algorithm}
+
+\section{Illustrative Code Snippet (if applicable)}
+\label{sec:listings}
+Include small, focused excerpts that clarify core ideas or reproducibility steps. Keep captions short and descriptive.
+
+\begin{lstlisting}[language=Python,caption={Example function signature for a data transform},label={lst:snippet},float=htbp]
+def transform(records: list[dict]) -> list[dict]:
+    """Validate and normalize input records (example)."""
+    out = []
+    for r in records:
+        if "id" not in r:
+            continue
+        r = {k.strip().lower(): v for k, v in r.items()}
+        out.append(r)
+    return out
+\end{lstlisting}
+
+Reference listings with \cref{lst:snippet}. If advanced highlighting is required, consider \texttt{minted} (not enabled in this template by default to avoid external dependencies).
+
+\section{Research Motivation and Direction}
+\label{sec:motivation}
+\textbf{Purpose.} This subsection translates the state of the art (\cref{sec:related}) and the theoretical lens (\cref{sec:theory}) into a concrete research direction that is both \emph{necessary} (gap) and \emph{actionable} (methods and data you will actually use).
+
+\paragraph{Problem significance.}
+Briefly argue why the problem matters (scientific or practical). Identify stakeholders and decision contexts affected by your results.
+
+\paragraph{Identified gap.}
+From the comparison in \cref{sec:related}, distill the unmet need (e.g., missing evaluation setting, scalability constraint, domain misfit, weak external validity). Define the gap in one or two sentences that are testable or measurable.
+
+\paragraph{Direction and scope.}
+State the research direction you will pursue to address the gap, together with scope boundaries (what is deliberately out of scope). Link this direction to the thesis \emph{Aim} and \emph{Tasks} defined in the Introduction and to the task→chapter mapping (see Table in the Introduction).
+
+\paragraph{Success criteria.}
+Name the primary evaluation criteria (metrics or qualitative outcomes) that will determine whether the approach succeeds in your empirical chapter.
+
+\section{Chapter Summary}
+\label{sec:summary}
+This chapter (i) fixed key concepts (\cref{sec:concepts}), (ii) compared approaches and exposed a concrete gap (\cref{sec:related}), and (iii) established the theoretical lens (\cref{sec:theory}). The \textbf{Research Motivation and Direction} (\cref{sec:motivation}) specifies how the thesis will address that gap, setting up the next chapter’s analysis of the case/system.
+
+\noindent\textbf{Conclusions (for Chapter~1).}
+We defined the conceptual vocabulary, contrasted major approaches with evidence, and selected a theory consistent with the problem setting. A concrete gap has been articulated together with success criteria and scope. These choices motivate the analysis in Chapter~\ref{chap:analysis} and the empirical design in Chapter~\ref{chap:empirical}.

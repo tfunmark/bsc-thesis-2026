@@ -1,0 +1,130 @@
+\documentclass{rnu-thesis}
+
+\usepackage[protrusion]{microtype}
+
+% --- Algorithms (float + pseudocode)
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{tikz} % harmless if already loaded via the class
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,shapes.symbols,fit,calc,matrix,graphs}
+\tikzset{>=Stealth}
+
+
+% % --- Code listings with minted (creates a 'listing' float)
+% \usepackage[newfloat]{minted} % compile with -shell-escape
+% --- Code listings without external deps
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  numbers=left,
+  numbersep=6pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  float=htbp, % keep if you want floaty listings
+  captionpos=t % caption on top (to match your template)
+}
+% Optional: pick a mono font explicitly
+% \setmonofont{Mono} % or Consolas/DejaVu Sans Mono/etc.
+
+
+% --- Bibliography via biblatex ---
+\usepackage[backend=biber,style=ieee,sorting=nty,maxbibnames=99]{biblatex}
+\addbibresource{x_bibliography/references.bib}
+
+% ====== Fill these in (example placeholders) ======
+\setthesisinfoLV
+  {<BSC DARBA NOSAUKUMS ŠEIT>}% LV Title
+  {Vārds Uzvārds}% LV Student
+  {Dr. Prof. Vadītāja Vārds Uzvārds, PhD}% LV Supervisor
+  {42484 Informācijas sistēmas (bak.)}% LV Study programme
+  {Dabaszinātņu un datortehnoloģiju katedra}% LV Department
+  {2025}% Year
+
+\setthesisinfoEN
+  {<BSC THESIS TITLE GOES HERE>}% EN Title
+  {Name Surname}% EN Student
+  {Dr. Prof. Supervisor Name Surname, PhD}% EN Supervisor
+  {42484 Information Systems (BSc)}% EN Study programme
+  {Department of Natural Sciences and Computer Engineering}% EN Department
+  {2025}% Year
+
+% ====== MANUAL THESIS SCOPE - COUNT AND FILL IN MANUALLY ======
+% Count your content manually and update these values:
+% - Total pages: count final PDF pages
+% - Tables/Figures/Algorithms/Listings: count from your List of Tables/Figures/etc.
+% - Annexes: count appendix chapters after \appendix
+% - References: count entries in your bibliography
+\setthesisscope
+  {XX}% Total pages (count final PDF)
+  {YY}% Total tables (count from List of Tables)
+  {ZZ}% Total figures (count from List of Figures) 
+  {xy}% Total algorithms (count from List of Algorithms)
+  {yz}% Total listings (count from List of Listings)
+  {xz}% Total annexes (count appendix chapters)
+  {zx}% Total references (count bibliography entries)
+
+\begin{document}
+
+\input{a_frontmatter/title_page_lv}
+\clearpage
+\input{a_frontmatter/title_page_en}
+\clearpage
+
+% Page numbering starts at Title page but number not printed there (done).
+% Show numbers from here:
+\pagenumbering{arabic}
+
+% ===== Abstracts & Keywords =====
+\input{a_frontmatter/abstract_lv}
+\input{a_frontmatter/abstract_en}
+\input{a_frontmatter/keywords}
+
+% ===== Table of Contents (and optional lists) =====
+\tableofcontents
+
+% ---- Meta lists: each on its own page, and not added to ToC ----
+\clearpage
+\begingroup\let\addcontentsline\relax\listoffigures\endgroup
+
+\clearpage
+\begingroup\let\addcontentsline\relax\listoftables\endgroup
+
+\clearpage
+\begingroup\let\addcontentsline\relax\listofalgorithms\endgroup
+
+\clearpage
+% \begingroup\let\addcontentsline\relax\listoflistings\endgroup
+\begingroup\let\addcontentsline\relax\lstlistoflistings\endgroup
+\clearpage
+
+
+
+% ===== Chapters =====
+% Unnumbered Introduction (still added to ToC)
+\input{b_chapters/a_introduction/introduction}
+
+\input{b_chapters/chapter1/chapter1}
+\input{b_chapters/chapter2/chapter2}
+\input{b_chapters/chapter3/chapter3}
+\input{b_chapters/chapter4/chapter4}
+\input{b_chapters/chapter5/chapter5}
+
+% ===== Conclusions =====
+\input{b_chapters/x_conclusions/conclusions}
+
+% ===== Literature =====
+\printbibliography[heading=bibintoc,title=Literature]
+
+
+% ===== Appendices =====
+\appendix
+\input{y_backmatter/appendices/appendixA}
+\input{y_backmatter/appendices/appendixB}
+
+% ===== Declarations & Acknowledgments (if needed at end) =====
+\input{y_backmatter/declaration}
+\input{y_backmatter/acknowledgments}
+
+\end{document}
