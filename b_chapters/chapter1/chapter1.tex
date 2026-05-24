@@ -1,123 +1,385 @@
 \chapter{Literature Review and Theoretical Background}
 \label{chap:litreview}
-
-% --- Purpose (for students) ---
-% This chapter defines key concepts, surveys related work, and sets the theoretical lens.
-% It must end by motivating the research direction and articulating the concrete gap your thesis fills.
+\label{ch:literature}
 
 \section{Core Concepts and Definitions}
 \label{sec:concepts}
-Introduce the foundational terms your thesis relies on using authoritative sources, e.g., \cite{porter2008,laudon2015}. Define each term exactly once and use it consistently throughout the thesis. Prefer primary definitions where possible; when multiple definitions exist, present the variants and justify your chosen convention.
 
-Inline emphasis: \emph{italics}, \textbf{bold}. Use \verb|\enquote{...}| (from \texttt{csquotes}) for quotations, e.g., \enquote{quoted text}. Use \verb|\url{...}| for clickable links such as \url{https://ctan.org}.
+Before discussing the system design and the implementation, it is important to explain the main concepts used in this thesis. These concepts form the basic theoretical background of the work. They help to describe the problem clearly and to show why a Telegram bot is a suitable solution for public transport information in Fergana city.
 
-\paragraph{Citation tip.}
-With \texttt{biblatex} (IEEE style in this project), numeric citations use \verb|\cite{...}|.\footnote{Place the citation after punctuation when it references a full sentence.} Group multiple sources as needed, e.g., \cite{friedman2006,schmidt2014}.
+An \textbf{information system} is a system that collects, stores, processes, and provides information to users. In simple words, it helps people find the information they need in a structured way. In this thesis, the developed system is an information system because it stores transport data and gives it to users through Telegram.
 
-\section{Related Work: Themes, Methods, and Evidence}
-\label{sec:related}
-Organize prior work by coherent themes (theory, methods, application domains) or chronology. For each theme, summarize the central idea, typical assumptions, evaluation protocols, and reported limitations. Contrast strands rather than listing them.
+A \textbf{Telegram bot} is a program that works inside Telegram and responds to user commands. A bot can send messages automatically, answer questions, and show stored information. Telegram bots are useful because they are easy to access and do not require installation of a separate mobile application.\cite{telegram_botapi}
 
-\begin{itemize}[leftmargin=1.2cm]
-  \item \textbf{Approach A (theory-driven).} Outline core mechanisms, typical datasets, and where this approach excels; note constraints or external validity issues \cite{friedman2006}.
-  \item \textbf{Approach B (data-driven/practice-oriented).} Contrast assumptions and deployment costs with Approach A; highlight reproducibility and measurement issues \cite{laudon2015}.
-  \item \textbf{Approach C (hybrid/emerging).} Summarize integration points and remaining open problems \cite{schmidt2014}.
-\end{itemize}
+A \textbf{database} is a structured place for storing information. It keeps data in an organized form so that it can be searched, updated, and used by a program. In this thesis, the database stores routes, stops, taxi services, and user records. \cite{elmasri2016database}
 
-When referring to figures, tables, algorithms, or listings, always use labels + \verb|\cref| (e.g., \cref{fig:example-figure,tab:example-table,alg:example,lst:snippet}).
+\textbf{SQLite} is a lightweight database system. It stores data in one local file and does not need a separate database server. SQLite is suitable for small and medium projects, especially when the system needs to be simple, reliable, and easy to deploy.\cite{sqlite_docs, kreibich2010sqlite}
 
-% ---- Figure example (caption under figure; centered by class) ----
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.7\linewidth]{b_chapters/chapter1/assets/RNU_large_logo.png}
-  \figsource{Author-created illustration (replace with your own figure and source).}
-  \caption{Example figure: a conceptual taxonomy (replace with your content).}
-  \label{fig:example-figure}
-\end{figure}
+A \textbf{route} is the path that a bus, minibus, or taxi follows from one point to another. A \textbf{stop} is a place where passengers get on or off public transport. These two concepts are important because the main goal of the bot is to help users find route and stop information quickly.
 
-% ---- Table example (caption above; ragged-right by class) ----
-{\singlespacing
-\begin{table}[h]
-  \caption{Comparison matrix (replace with your synthesis)}
-  \label{tab:example-table}
-  \centering
-  \begin{tabular}{lrrr}
-    \toprule
-    Criterion            & Method A & Method B & Method C\\
-    \midrule
-    Accuracy (avg)       & 0.82     & 0.79     & 0.84\\
-    Cost (relative)      & High     & Medium   & Low\\
-    Data requirement     & Large    & Medium   & Small\\
-    \bottomrule
-  \end{tabular}
+A \textbf{taxi service} is a transport service that carries passengers by car. In this thesis, taxi services are included because many people in Fergana use both public transport and taxis in daily life. For this reason, the bot does not only show bus and minibus routes, but also gives useful taxi information.
 
-  \vspace{2mm}
-  \emph{Note:} Replace placeholders with your evidence; include units and sources.
+A \textbf{user} is a person who interacts with the system. In this project, the users are residents of Fergana, students, visitors, and other people who need transport information. The system is designed to be simple enough for all these groups.
+
+A \textbf{minimum viable product (MVP)} is the first working version of a system that contains only the most important functions. MVP is often used in student and startup projects because it allows the developer to test the main idea first and improve the system later. In this thesis, the Telegram bot is developed as an MVP. \cite{sommerville2016software}
+
+Table~\ref{tab:core_concepts} summarizes the main terms used in the thesis.
+
+\begin{table}[H]
+\centering
+\caption{Main concepts used in the thesis}
+\label{tab:core_concepts}
+\begin{tabular}{|p{4cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{Concept} & \textbf{Simple definition} & \textbf{Role in this thesis} \\
+\hline
+Information system & A system that collects, stores, processes, and provides information & The developed bot works as an information system for transport data \\
+\hline
+Telegram bot & A program inside Telegram that answers user commands automatically & The main interface of the project \\
+\hline
+Database & A structured place for storing data & Stores routes, stops, taxi services, and users \\
+\hline
+SQLite & A lightweight database system stored in one file & Used as the database technology in the project \\
+\hline
+Route & The path followed by public transport & One of the main data types shown by the bot \\
+\hline
+Stop & A place where passengers enter or leave transport & Used for route search and route description \\
+\hline
+Taxi service & A car-based passenger transport service & Included as additional useful transport information \\
+\hline
+MVP & The first working version of a system with key functions & Describes the implementation strategy of the project \\
+\hline
+\end{tabular}
 \end{table}
-}
+
+These definitions show that the project combines transport information, database storage, and Telegram-based interaction. This combination is simple, practical, and suitable for users who need fast access to transport data. The next sections will discuss related work and theoretical ideas in more detail.
+
+\section{Related Work: Themes, Methods, Evidence}
+\label{sec:related}
+
+Public transport information systems are widely used in many cities. Their main purpose is to help passengers understand how to move from one place to another. Such systems can show routes, stops, timetables, vehicle locations, ticket information, and other useful data. In large cities, these systems are often connected with official transport operators and map services. In smaller or regional cities, such systems may be less developed or not available in a simple digital form. \cite{kasinathan2020transport}
+
+Modern transport information services can be divided into several groups. The first group includes official mobile applications. These applications are usually developed by city transport departments or private companies. They may include route maps, timetables, and real-time vehicle tracking. The second group includes web services. These services work through a browser and can be used on phones and computers. The third group includes map platforms such as Google Maps or Yandex Maps. They can provide navigation and route suggestions in some cities. The fourth group includes messaging bots, including Telegram bots. These bots give information through a chat interface.\cite{adamopoulou2020chatbots, dale2016return}
+
+Each solution has advantages and limitations. A mobile application can have many functions, but it requires installation. It also needs regular updates and support for different devices. A website is easier to access, but it may not be as convenient as a chat interface for quick questions. Map platforms are powerful, but they do not always contain complete local route information for smaller cities. A Telegram bot is simpler, but it can be very practical if users already use Telegram every day. \cite{following2019messaging}
+
+Table~\ref{tab:transport_tools_comparison} compares different types of public transport information tools.
+
+\begin{table}[H]
+\centering
+\caption{Comparison of public transport information tools}
+\label{tab:transport_tools_comparison}
+\begin{tabular}{|p{3.2cm}|p{4cm}|p{3.5cm}|p{3.5cm}|}
+\hline
+\textbf{Tool type} & \textbf{Main advantages} & \textbf{Main limitations} & \textbf{Suitability for this project} \\
+\hline
+Mobile application & Can include maps, notifications, and many functions & Requires installation and more development time & Less suitable for MVP because it is more complex \\
+\hline
+Website & Can be opened in a browser and updated centrally & May be less convenient for quick chat-based use & Possible, but not the main choice \\
+\hline
+Map platform & Provides navigation and visual maps & Local route data may be incomplete or unavailable & Useful as support, but not enough as the main system \\
+\hline
+Telegram bot & Easy to access, works inside a popular messenger, does not require a new app & Limited interface compared to a full mobile app & Highly suitable for a simple transport information MVP \\
+\hline
+\end{tabular}
+\end{table}
+
+The comparison shows that a Telegram bot is a practical solution for the scope of this bachelor thesis. It is not the most complex tool, but it is accessible and easy to use. This is important because the goal of the project is not to create a large commercial platform, but to develop a working information system for public transport data in Fergana city.
+
+Several themes are important in related work on digital transport information systems. The first theme is accessibility. A transport information system should be easy to access for different groups of users. These users may include students, workers, older people, tourists, and new residents. If the system is difficult to install or use, many people will not use it.
+
+The second theme is data organization. Transport information must be stored in a structured way. Routes, stops, and services should not be stored only as plain text. They should be placed in a database so that the system can search and show them correctly. A database also makes future improvement easier.
+
+The third theme is user interaction. A good transport information system should allow users to ask for information quickly. In the case of a Telegram bot, this interaction is based on commands and messages. The user can type a command such as \texttt{/marshrut 10} or \texttt{/taxi}, and the bot returns the needed information.
+
+The fourth theme is maintainability. A digital system should be easy to update. Public transport data can change. New stops may appear. Route names and taxi phone numbers may be updated. For this reason, the system architecture should allow future changes.
+
+Table~\ref{tab:related_work_themes} summarizes the main themes that are important for this project.
+
+\begin{table}[H]
+\centering
+\caption{Main themes from related work}
+\label{tab:related_work_themes}
+\begin{tabular}{|p{4cm}|p{6cm}|p{4cm}|}
+\hline
+\textbf{Theme} & \textbf{Meaning} & \textbf{Application in this thesis} \\
+\hline
+Accessibility & The system should be easy to open and use & Telegram is used because many users already have it \\
+\hline
+Data organization & Transport data should be stored in a structured form & SQLite database stores routes, stops, taxi services, and users \\
+\hline
+User interaction & Users should receive answers quickly and clearly & Bot commands are used for simple interaction \\
+\hline
+Maintainability & The system should be easy to update and extend & The database structure supports adding new routes and stops \\
+\hline
+Scalability & The system should allow future growth & Future versions may include maps, admin panel, and AI support \\
+\hline
+\end{tabular}
+\end{table}
+
+For this thesis, related work supports the idea that a simple digital transport information system can be useful even without advanced functions. The most important point is that users must have one clear place where they can find route and stop information. A Telegram bot can provide this function in a practical way. \cite{kamberi2021telegram}\cite{shawar2007chatbots}
+
 
 \section{Theoretical Framework}
-\label{sec:theory}
-State the theoretical lens or formal model that grounds your work. Define variables and relationships precisely, and connect assumptions to the context of your thesis. Keep derivations concise; move long proofs to an appendix.
+\label{sec:framework}
 
-\begin{align}
-  \label{eq:objective}
-  J(\theta) &= \mathbb{E}_{(x,y)\sim \mathcal{D}} \bigl[\, \ell(f_\theta(x),\, y)\, \bigr] \, ,
-\end{align}
+The Fergana Transport Bot is designed as an information system with five
+main parts: the user, the messaging client (Telegram), the bot
+application, the database, and the hosting environment. These parts work
+together in a client--server architecture with asynchronous message
+passing. This framework is widely used in modern chat bots because it can
+handle many user requests at the same time without blocking the server.
 
-where $\ell$ is the loss aligned to your evaluation criterion and $f_\theta$ the model or rule under study. Reference important equations with \verb|\cref|, e.g., \cref{eq:objective}.
+The general flow of a user request is shown in
+Figure~\ref{fig:framework}. The user sends a command from the Telegram
+client. The Telegram servers forward the command to the bot through the
+Bot API. The bot application processes the command, reads data from the
+database, and sends the answer back to the user through the same
+channel.
 
-% ---- Algorithm (float + pseudocode) example ----
-\begin{algorithm}[h]
-\caption{Generic greedy selection (template — adapt to your context)}
-\begin{algorithmic}[1]
-  \State Initialize solution $S \gets \emptyset$
-  \While{a feasible choice exists}
-    \State choose the best feasible item $x$ according to criterion $C$
-    \State $S \gets S \cup \{x\}$
-  \EndWhile
-  \State \Return $S$
-\end{algorithmic}
-\label{alg:example}
-\end{algorithm}
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=1.0cm and 0.7cm,
+    box/.style={rectangle, draw, rounded corners=2pt, minimum width=1.9cm,
+        minimum height=0.9cm, align=center, font=\small},
+    db/.style={cylinder, draw, shape border rotate=90, aspect=0.3,
+        minimum width=1.6cm, minimum height=0.9cm, align=center,
+        font=\small, fill=blue!5},
+    cloud/.style={ellipse, draw, dashed, minimum width=2.4cm,
+        minimum height=1.0cm, align=center, font=\small, fill=gray!5},
+    arrow/.style={->, >=Stealth, thick}
+]
+    \node[box] (user) {User\\(input)};
+    \node[box, right=of user] (tg) {Telegram\\client};
+    \node[cloud, right=of tg] (api) {Telegram\\Bot API};
+    \node[box, right=of api] (bot) {Bot\\application};
+    \node[db, right=of bot] (db) {Database};
 
-\section{Illustrative Code Snippet (if applicable)}
-\label{sec:listings}
-Include small, focused excerpts that clarify core ideas or reproducibility steps. Keep captions short and descriptive.
+    \draw[arrow] (user) -- node[above, font=\scriptsize] {1.~request} (tg);
+    \draw[arrow] (tg) -- (api);
+    \draw[arrow] (api) -- (bot);
+    \draw[arrow] (bot) -- node[above, font=\scriptsize] {2.~query} (db);
+    \draw[arrow, dashed] (db.south) to[bend left=35]
+        node[below, font=\scriptsize] {3.~answer} (user.south);
+\end{tikzpicture}
+\caption{Theoretical framework: client--server flow of a bot request}
+\label{fig:framework}
+\end{figure}
 
-\begin{lstlisting}[language=Python,caption={Example function signature for a data transform},label={lst:snippet},float=htbp]
-def transform(records: list[dict]) -> list[dict]:
-    """Validate and normalize input records (example)."""
-    out = []
-    for r in records:
-        if "id" not in r:
-            continue
-        r = {k.strip().lower(): v for k, v in r.items()}
-        out.append(r)
-    return out
+The framework can also be described with the classic
+\textit{input--processing--output} model. The input is the user message.
+The processing is the matching of the message to a command handler and
+the database query. The output is the reply text sent back to Telegram.
+This simple model is enough for a small public transport information
+system and matches well with the asynchronous programming style of the
+aiogram library. \cite{aiogram_docs}
+
+Three properties of this framework are important for the project:
+
+\begin{itemize}
+    \item \textbf{Statelessness of the API.} Each request is independent.
+        The bot does not need to keep a long session for every user.
+    \item \textbf{Asynchronous processing.} Many requests can be handled
+        in parallel. The waiting time for one user does not block
+        another.\cite{python_asyncio}
+    \item \textbf{Separation of data and code.} Routes, stops, and taxi
+        services live in the database. The Python code only handles
+        commands and formatting. New data can be added without changing
+        the code.
+\end{itemize}
+
+These three properties shape the design decisions in
+Chapter~\ref{ch:development}. They explain why aiogram, SQLite, and a
+modular command-handler structure are a good fit for the Fergana
+Transport Bot.
+
+\section{Illustrative Code Snippet}
+\label{sec:code-snippet}
+
+To make the theoretical framework concrete, this section presents a
+small code example. Listing~\ref{lst:framework-handler} shows the
+typical structure of an aiogram command handler. The example
+demonstrates how the input--processing--output model from
+Section~\ref{sec:framework} is implemented in Python. \cite{aiogram_docs}
+
+\begin{lstlisting}[language=Python, caption={Example of an asynchronous
+    command handler in aiogram}, label={lst:framework-handler}]
+from aiogram import Dispatcher, types
+from aiogram.filters import Command
+
+dp = Dispatcher()
+
+@dp.message(Command("marshrut"))
+async def handle_route_command(message: types.Message):
+    # 1. INPUT: read the command argument from the user message
+    args = message.text.split(maxsplit=1)
+    if len(args) < 2:
+        await message.answer("Please enter a route number.")
+        return
+    route_number = args[1].strip()
+
+    # 2. PROCESSING: read the matching data from the database
+    stops = db.get_stops_by_route(route_number)
+
+    # 3. OUTPUT: send the formatted answer back to the user
+    if not stops:
+        await message.answer(f"Route {route_number} not found.")
+    else:
+        text = f"Route {route_number}:\n" + "\n".join(stops)
+        await message.answer(text)
 \end{lstlisting}
 
-Reference listings with \cref{lst:snippet}. If advanced highlighting is required, consider \texttt{minted} (not enabled in this template by default to avoid external dependencies).
+The example shows three important features that are typical for the
+chosen framework. First, the function is declared with the
+\texttt{async} keyword. This means many users can call the handler at
+the same time without blocking the server. Second, the
+\texttt{@dp.message(Command("marshrut"))} decorator links the handler
+to a specific command. The same pattern is used for every command in
+Chapter~\ref{ch:development}. Third, the database call and the answer
+sending are clearly separated. This separation makes the code easy to
+read, easy to test, and easy to extend with new commands.
 
 \section{Research Motivation and Direction}
 \label{sec:motivation}
-\textbf{Purpose.} This subsection translates the state of the art (\cref{sec:related}) and the theoretical lens (\cref{sec:theory}) into a concrete research direction that is both \emph{necessary} (gap) and \emph{actionable} (methods and data you will actually use).
 
-\paragraph{Problem significance.}
-Briefly argue why the problem matters (scientific or practical). Identify stakeholders and decision contexts affected by your results.
+This section explains why the project is worth doing, what gap it fills,
+and what its scope is. The motivation is based on the problem statement
+in the Introduction, the concepts in Section~\ref{sec:concepts}, and
+the comparison with related work in Section~\ref{sec:related}.
 
-\paragraph{Identified gap.}
-From the comparison in \cref{sec:related}, distill the unmet need (e.g., missing evaluation setting, scalability constraint, domain misfit, weak external validity). Define the gap in one or two sentences that are testable or measurable.
+\subsection{Significance of the Problem}
+\label{subsec:significance}
 
-\paragraph{Direction and scope.}
-State the research direction you will pursue to address the gap, together with scope boundaries (what is deliberately out of scope). Link this direction to the thesis \emph{Aim} and \emph{Tasks} defined in the Introduction and to the task→chapter mapping (see Table in the Introduction).
+Fergana is a regional capital with about 300\,000 inhabitants. Daily
+mobility in the city depends on public buses, shared minibuses, and
+taxis. Despite this, the city has no centralized digital information
+system for public transport. Residents and visitors lose time every day
+because they cannot quickly find the right route or stop. The problem
+affects students, workers, older residents, and tourists. A simple and
+free digital tool can reduce this daily loss of time.\cite{stat_uz_fergana}
 
-\paragraph{Success criteria.}
-Name the primary evaluation criteria (metrics or qualitative outcomes) that will determine whether the approach succeeds in your empirical chapter.
+\subsection{Identified Gap}
+\label{subsec:gap}
+
+The related work analysis in Section~\ref{sec:related} showed that
+similar transport information bots exist for larger cities such as
+Moscow and Tashkent. However, no such bot exists for Fergana. General
+map platforms such as Yandex Maps cover only a part of the local routes.
+A summary of the gap is shown in Table~\ref{tab:gap}.
+
+\begin{table}[h]
+\centering
+\caption{Gap analysis: existing solutions vs. needs of Fergana}
+\label{tab:gap}
+\begin{tabular}{p{0.32\textwidth}p{0.30\textwidth}p{0.30\textwidth}}
+\hline
+\textbf{Need of Fergana users} & \textbf{Existing solutions} &
+\textbf{Gap} \\
+\hline
+Quick access without
+installation & Mobile apps require install & No bot for Fergana \\
+Full coverage of local
+bus routes & Yandex Maps covers part of routes & Local routes missing \\
+Free and zero-cost service
+& Some commercial apps & No free local tool \\
+Familiar interface for
+local users & Telegram is widely used & Not used yet for this task \\
+Easy update of route data
+& Closed databases of operators & No open editable dataset \\
+\hline
+\end{tabular}
+\end{table}
+
+The gap is clear: Fergana users have a real need, but no existing tool
+covers it fully. A Telegram bot connected to a local database can fill
+this gap with low cost and low technical risk.
+
+\subsection{Direction and Scope}
+\label{subsec:scope}
+
+Based on the identified gap and the chosen framework, the direction of
+the project is set as follows. The thesis develops a Telegram bot with a
+manually curated SQLite database for Fergana minibuses, bus stops, and
+taxi services. The bot is implemented in Python with the aiogram
+library and deployed on a free cloud platform. The project is built as
+a minimum viable product (MVP). It focuses on the most important
+functions: showing route stops, searching a route between two stops,
+and providing taxi contacts.
+
+The scope of the thesis is limited on purpose. The following items are
+\textbf{out of scope} for the current work:
+
+\begin{itemize}
+    \item GPS-based real-time tracking of vehicles, because no public
+        GPS data is available in Fergana.
+    \item Integration with payment systems for tickets, because there
+        is no electronic ticket system in the city.
+    \item A separate native mobile application, because the main idea
+        of the project is that Telegram is enough.
+    \item Free-form AI question answering, because it adds external
+        dependencies and is better suited as future work.
+\end{itemize}
+
+These items are not ignored. They are discussed in
+Chapter~\ref{ch:discussion} as proposals for future development.
+
+\subsection{Success Criteria}
+\label{subsec:success}
+
+The success of the project is measured by clear criteria. These
+criteria are used later in Chapter~\ref{ch:development} to evaluate the
+final bot. The criteria are shown in Table~\ref{tab:success-criteria}.
+
+\begin{table}[h]
+\centering
+\caption{Success criteria of the project}
+\label{tab:success-criteria}
+\begin{tabular}{lp{0.5\textwidth}}
+\hline
+\textbf{Criterion} & \textbf{Target} \\
+\hline
+Response time & Average reply time below 2 seconds. \\
+Coverage & At least five Fergana bus routes in the database. \\
+Reliability & Success rate of common requests above 90\,\%. \\
+User feedback & Positive feedback from more than 70\,\% of test users. \\
+Availability & The bot is hosted 24/7 on a free cloud platform. \\
+\hline
+\end{tabular}
+\end{table}
+
+These criteria are realistic for a bachelor thesis. They are also
+strict enough to show whether the chosen direction works in practice.
 
 \section{Chapter Summary}
-\label{sec:summary}
-This chapter (i) fixed key concepts (\cref{sec:concepts}), (ii) compared approaches and exposed a concrete gap (\cref{sec:related}), and (iii) established the theoretical lens (\cref{sec:theory}). The \textbf{Research Motivation and Direction} (\cref{sec:motivation}) specifies how the thesis will address that gap, setting up the next chapter’s analysis of the case/system.
+\label{sec:ch1-summary}
 
-\noindent\textbf{Conclusions (for Chapter~1).}
-We defined the conceptual vocabulary, contrasted major approaches with evidence, and selected a theory consistent with the problem setting. A concrete gap has been articulated together with success criteria and scope. These choices motivate the analysis in Chapter~\ref{chap:analysis} and the empirical design in Chapter~\ref{chap:empirical}.
+This chapter presented the theoretical background of the thesis. The
+main concepts used in the work were defined in Section~\ref{sec:concepts}:
+information system, Telegram bot, database, SQLite, route, stop, taxi
+service, user, and minimum viable product. These concepts form the
+common vocabulary used in the rest of the thesis.
+
+Section~\ref{sec:related} reviewed related work and compared four types
+of transport information tools: mobile applications, websites, map
+platforms, and messaging bots. The comparison showed that a Telegram
+bot is a suitable solution for the specific context of Fergana city,
+where users already use Telegram every day and where general map
+platforms do not provide full route coverage.
+
+Section~\ref{sec:framework} described the theoretical framework of the
+project as a client--server system with asynchronous message passing.
+The input--processing--output model was used to explain how a user
+request becomes an answer. The framework was made concrete in
+Section~\ref{sec:code-snippet} with an example aiogram handler that
+follows the same model in Python code.
+
+Section~\ref{sec:motivation} explained the significance of the problem,
+described the gap left by existing solutions, set the scope of the
+work, and listed five success criteria. The criteria will be used in
+Chapter~\ref{ch:development} to evaluate the final system.
+
+These choices motivate the case and system analysis presented in the
+next chapter. Chapter~\ref{ch:analysis} describes the city of Fergana,
+the local transport context, user groups, and the functional and
+non-functional requirements of the system.

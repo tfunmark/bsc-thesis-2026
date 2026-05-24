@@ -1,28 +1,128 @@
-\chapter{Conclusions}
-\label{chap:conclusions}
+\chapter*{Conclusions}
+\addcontentsline{toc}{chapter}{Conclusions}
+\label{ch:conclusions}
 
-The \textbf{Conclusions} chapter must clearly demonstrate that the aim and tasks of the Bachelor Paper have been fulfilled. This chapter is not a repetition of earlier text, but a synthesized summary that links the research aim, tasks, hypothesis, and results.
+The Bachelor Paper presented the development of a Telegram bot information
+system for public transport in Fergana city. This chapter summarizes the
+work, confirms the completion of all tasks, validates the hypothesis, and
+states the achievement of the aim. The chapter also describes the practical
+and theoretical value of the work.
 
-When preparing this section, students should ensure that:
+\section*{Confirmation of Tasks}
+\addcontentsline{toc}{section}{Confirmation of Tasks}
 
-\begin{itemize}
-  \item \textbf{Confirmation of tasks.} Explicitly state that all tasks set out in the Introduction have been completed. A good practice is to connect each task with the chapter where it was accomplished.  
-  Example:  
-  “Task 1 (literature review) was completed in Chapter 1, providing a theoretical framework for the study. Task 2 (analysis of the case/system) was carried out in Chapter 2. Task 3 (empirical study) was presented in Chapter 3. Task 4 (development of proposals) was fulfilled in Chapter 4.”
-  
-  \item \textbf{Validation of hypothesis.} Clearly indicate whether the research hypothesis (if formulated) was validated or rejected, based on the obtained results.  
-  Example:  
-  “The proposed hypothesis was confirmed, as the empirical results demonstrated …”
-  
-  \item \textbf{Achievement of the aim.} Explicitly state that the aim of the thesis has been reached, supported by the fact that all tasks were accomplished and the hypothesis was addressed.  
-  Example:  
-  “Therefore, it can be concluded that the aim of the thesis has been achieved.”
-  
-  \item \textbf{Avoid repetition.} Do not copy entire findings from chapters. Instead, summarize them concisely to show the logical progression from tasks → results → aim.
-  
-  \item \textbf{Practical and theoretical value.} Conclude with a short statement on the significance of the results (e.g., how the findings may be used in practice or contribute to the field).
-\end{itemize}
+Seven tasks were defined in the Introduction. Each task was completed in a
+specific part of the thesis. The correspondence between the tasks and the
+chapters is shown in Table~\ref{tab:tasks-conclusion}.
 
-\noindent
-\textbf{Recommended final formulation:}
-“All tasks set out in the Introduction were accomplished (Tasks 1–4 correspond to Chapters 1–4). The research hypothesis was validated, and the aim of the thesis has been reached.”
+\begin{table}[h]
+\centering
+\caption{Correspondence between research tasks and thesis chapters}
+\label{tab:tasks-conclusion}
+\begin{tabular}{p{0.55\textwidth}l}
+\hline
+\textbf{Task} & \textbf{Chapter} \\
+\hline
+1. Review literature about information systems, Telegram bots, and
+databases. & Chapter~1 \\
+2. Analyze the current situation of public transport information in
+Fergana. & Chapter~2 \\
+3. Design the structure of the Telegram bot and the SQLite database. &
+Section~3.1 \\
+4. Develop the bot using Python and the aiogram library. & Section~3.1
+and Section~3.2 \\
+5. Add real transport data about routes, stops, and taxi services. &
+Section~3.1, Section~3.2 \\
+6. Test the bot with a small group of users and evaluate the results. &
+Section~3.2 and Section~3.3 \\
+7. Prepare proposals for future improvement of the system. & Chapter~4 \\
+\hline
+\end{tabular}
+\end{table}
+
+Task~1 (literature review on chat bots, Telegram Bot API, and database
+design) was completed in Chapter~1, which provided the theoretical
+foundation for the project. Task~2 (analysis of public transport information
+in Fergana) was carried out in Chapter~2, which showed a clear gap in
+available digital tools. Task~3 (database design) and Task~4 (bot
+development) were accomplished and described in Sections~3.1 and~3.2.
+Task~5 (data collection) was completed by importing six bus routes from
+Yandex Maps into the SQLite database. Task~6 (testing and evaluation) was
+carried out with 12 users from Fergana and is described in Sections~3.2
+and~3.3. Task~7 (proposals for future improvement) was fulfilled in
+Chapter~4, where extensions such as Uzbek language support, a button menu,
+and AI integration were proposed.
+
+\section*{Validation of the Hypothesis}
+\addcontentsline{toc}{section}{Validation of the Hypothesis}
+
+The hypothesis of the study was formulated as follows: \textit{a Telegram
+bot connected to a SQLite database can give Fergana residents fast and
+reliable access to transport information, and it can be more accessible
+than a mobile application because Telegram is already installed on many
+users' phones.}
+
+The hypothesis was validated by the results of the user testing presented
+in Chapter~3. The average response time was 0.8~seconds, which is below
+the target of 2~seconds. The success rate of requests was 94\,\%. The
+positive feedback rate was 92\,\% (11 of 12 test users). Test users also
+confirmed that they prefer using the bot inside Telegram rather than
+installing a separate mobile application. These results confirm that the
+proposed solution is both fast and reliable, and that the chosen
+distribution channel (Telegram) is well accepted by the target users.
+
+\section*{Achievement of the Aim}
+\addcontentsline{toc}{section}{Achievement of the Aim}
+
+The aim of the thesis was to develop a Telegram bot information system that
+helps Fergana residents and visitors find information about public transport
+routes, stops, and taxi services. The aim was achieved. The developed bot,
+\texttt{@FerganaTransportBot}, is deployed on the PythonAnywhere cloud
+platform and is available 24/7. The bot supports six commands, contains six
+bus routes with 84~stops, and was successfully tested with real users.
+
+The three defended thesis statements presented in the Introduction were
+also supported by the work:
+
+\begin{enumerate}
+    \item \textit{A new Telegram bot system for public transport
+        information in Fergana city, based on Python and SQLite, was
+        offered.} The bot was designed, implemented, and deployed.
+    \item \textit{The traditional approach of accessing transport
+        information was modified by moving it from offline sources to a
+        24/7 digital channel inside Telegram.} The bot replaces the need
+        to ask drivers or other people for route information.
+    \item \textit{An extensible architecture that allows future
+        integration with AI assistants for handling free-form questions
+        was suggested.} The architecture and the proposed extension were
+        described in Chapter~4.
+\end{enumerate}
+
+\section*{Practical and Theoretical Value}
+\addcontentsline{toc}{section}{Practical and Theoretical Value}
+
+\noindent\textbf{Practical value.} The Fergana Transport Bot is a real,
+working system that can be used by Fergana residents and visitors. It is
+free, available 24/7, and does not require the installation of a separate
+mobile application. The bot can save time for users who need quick
+information about bus routes, stops, or taxi services.
+
+\noindent\textbf{Theoretical value.} The work demonstrates how a Telegram
+bot can replace a simple mobile application for information delivery in
+regional cities. The combination of Python, aiogram, and SQLite is shown to
+be sufficient for a small-scale public transport information system. The
+study also shows that a manually collected dataset can be a practical
+solution when official open data is not available.
+
+\noindent\textbf{Replicability.} The same approach can be applied to other
+regional cities of Uzbekistan and to similar cities in other countries
+where Telegram is widely used and official transport data is missing. The
+modular database structure allows easy extension with new routes, stops,
+and taxi services.
+
+\section*{Final Statement}
+\addcontentsline{toc}{section}{Final Statement}
+
+All tasks set out in the Introduction were accomplished (Tasks~1--7
+correspond to Chapters~1--4). The research hypothesis was validated, and
+the aim of the thesis has been reached.

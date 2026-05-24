@@ -1,34 +1,136 @@
 \unchapter{Introduction}
 
-The introduction outlines the relevance of the chosen topic, its aim, object and subject of study, formulated research problem, research tasks, and applied methods. It also may include the research hypothesis and information about the approbation (presentation, publication, or expert review) of the results.  
+Public transport is an important part of daily life in every city. Many people use buses, minibuses, and taxis to go to work, school, university, markets, hospitals, and other places. For this reason, clear transport information is very important. A person needs to know which route to take, where the stop is, and how to reach the needed place.
 
-\textbf{Topicality of the problem:}  
-Briefly describe why the selected topic is important and relevant. This may include current challenges in the industry, social or economic context, scientific novelty, or practical application.  
+Fergana is one of the important cities of Uzbekistan. \cite{stat_uz_fergana} It is a regional city with many residents, students, workers, and visitors. Public transport in Fergana is used every day. Minibuses and buses are common means of transport. Taxi services are also widely used. However, transport information is often not collected in one digital system. A user may need to ask other people, search in social networks, or learn routes by personal experience. This is not always fast and comfortable.
 
-\textbf{Aim of the study:}  
-Clearly define the main purpose of the work. The aim is usually expressed in one sentence and should not be too broad or too narrow. Example: “The aim of the study is to develop recommendations for improving [system/process/topic] in [context/field].”  
+The problem is especially important for new residents, students, tourists, and people who do not know the city well. They may not know which route goes to a needed place. They may also not know the names of stops. In many cases, the information is available only from local people. This creates a practical problem. The user does not have one simple and free source of transport information.
 
-\textbf{Object of the study:}  
-Indicate the broader field or phenomenon under investigation (e.g., “entrepreneurial activity,” “information systems,” “educational processes”).  
+Today, many people in Uzbekistan use Telegram. \cite{datareportal_uz_2024} Telegram is a messaging application. A messaging application is a program for sending and receiving messages. Telegram also supports bots. A bot is a small program that works inside Telegram and answers user commands. A Telegram bot can give information automatically. The user does not need to install a new mobile application. The user only needs Telegram, which is already installed on many phones.
 
-\textbf{Subject of the study:}  
-Specify the narrower aspect within the object that will be analyzed (e.g., “employee motivation system,” “data warehouse design methodology,” “student performance evaluation methods”).  
+For this reason, a Telegram bot can be a suitable solution for public transport information in Fergana. It can work at any time. It can be free for users. It can store route data in a database. A database is a structured place for storing information. In this work, the database stores routes, stops, taxi services, and user records for simple analytics.
 
-\textbf{Research problem:}  
-Formulate the main problem that the study addresses. This can be expressed as a contradiction, challenge, or knowledge gap (e.g., “high staff turnover,” “lack of effective data integration,” “insufficient methodological guidance”).  
+The developed system is called \textbf{Fergana Transport Bot}. The bot is designed as a simple information system. An information system is a system that collects, stores, processes, and gives information to users. In this project, the system gives public transport information to Telegram users. The main users are residents and visitors of Fergana city.
 
-\textbf{Tasks of the study:}  
-List the specific steps needed to achieve the aim. Tasks are usually formulated as 4–6 items and should correspond directly to the structure of the thesis. For example:  
-1. Review theoretical approaches and relevant literature.  
-2. Analyze the chosen case, field, or system.  
-3. Conduct empirical or practical research.  
-4. Develop proposals, models, or improvements and evaluate their efficiency.  
+\textbf{Topicality of the problem.}
 
-\textbf{Hypothesis (if applicable):}  
-Formulate a testable statement about the expected outcome. Example: “Implementing the proposed measures will improve service quality and reduce costs.”  
+The topic is relevant because Fergana city does not have a centralized, free, and easy-to-use digital information system for public transport. Public transport users often need quick information about routes and stops. If this information is not easy to find, users lose time. They may choose the wrong route. They may need to ask other people. This is not convenient.
 
-\textbf{Research methods:}  
-Indicate the methods used in the work (e.g., literature analysis, surveys, experiments, case studies, statistical analysis, modelling, comparative analysis).  
+Digital services can help to solve this problem. A mobile application is one possible solution. However, a mobile application needs installation. It also needs more development time and more support. In the scope of this bachelor thesis, Telegram is a more practical choice. Telegram is already popular in Uzbekistan. A Telegram bot is easy to open and easy to use. It can work on different devices. It can work on phones and computers.
 
-\textbf{Approbation of the study (if any):}  
-Mention where and how the results have been presented or evaluated (e.g., student conferences, publications, expert reviews).  
+The topic also has practical value. The system can help people find transport information faster. It can also be extended in the future. For example, it can be used in other regional cities of Uzbekistan. It can also be improved with an admin panel, maps, or artificial intelligence in the future. Artificial intelligence is not included in the current version. It is moved to future development to keep the project focused.
+
+The topic is also suitable for an Information Systems bachelor thesis. It includes problem analysis, system design, database design, software development, testing, and evaluation. These parts match the study programme of Information Systems.
+
+\textbf{Aim of the study.}
+
+The aim of the study is to develop a Telegram bot information system that helps Fergana residents and visitors find information about public transport routes, stops, and taxi services.
+
+\textbf{Object of the study.}
+
+The object of the study is the information support of public transport users in regional cities of Uzbekistan.
+
+\textbf{Subject of the study.}
+
+The subject of the study is the development of a Telegram bot as an information system for public transport in Fergana city.
+
+\textbf{Research problem.}
+
+The research problem is that Fergana has no centralized, free, and easy-to-use digital information system for public transport. As a result, users do not always have fast access to route, stop, and taxi information.
+
+The problem can be described in the following way. Public transport information exists in the city, but it is not always organized in one place. Some users know routes from personal experience. Some users ask other people. Some users search in social networks. These ways are not stable and not always correct. A simple digital system can reduce this problem.
+
+\textbf{Tasks of the study.}
+
+To achieve the aim of the study, the following tasks are defined:
+
+\begin{enumerate}
+    \item To review literature about information systems, public transport information services, Telegram bots, and database systems.
+    \item To analyze the current situation of public transport information in Fergana city.
+    \item To design the structure of the Telegram bot and the SQLite database.
+    \item To develop the Telegram bot using Python and the aiogram library.
+    \item To add real transport data about routes, stops, and taxi services to the database.
+    \item To test the bot with a small group of users and evaluate the results.
+    \item To prepare proposals for future improvement of the system.
+\end{enumerate}
+
+\textbf{Hypothesis.}
+
+The hypothesis of the study is that a Telegram bot connected to a SQLite database can give Fergana residents fast and reliable access to transport information. It can be more accessible than a mobile application because Telegram is already installed on many users' phones.
+
+\textbf{Research methods.}
+
+Several research methods are used in this thesis.
+
+The first method is literature analysis. Literature analysis means reading and studying books, articles, documentation, and online sources. This method is used to understand information systems, Telegram bots, databases, and public transport information systems.
+
+The second method is case analysis. Case analysis means studying one real situation. In this thesis, the case is public transport information in Fergana city. This method helps to understand the local problem and user needs.
+
+The third method is system design. System design means planning how the system will work before coding. In this work, system design includes bot commands, database tables, and the general architecture of the system.
+
+The fourth method is software development. Software development means creating a working program. In this thesis, the bot is developed in Python. Python is a programming language. The bot uses aiogram. Aiogram is a Python library for Telegram bots. A library is ready-made code that helps developers build software faster.
+
+The fifth method is database modelling. Database modelling means planning how data will be stored. In this work, SQLite is used. SQLite is a small database system. It stores data in one file. This is enough for a small public transport information system.
+
+The sixth method is testing. Testing means checking if the system works correctly. The bot is tested with main commands. These commands include route search, stop information, taxi information, and help information.
+
+The seventh method is user feedback. User feedback means collecting opinions from real users. In this thesis, the system is tested in a small pilot test with users from the student's personal network in Fergana. A pilot test is a small first test of a system.
+
+\textbf{Description of the developed system.}
+
+The developed system is a Telegram bot named \textbf{Fergana Transport Bot}. It uses Python as the main programming language. It uses the aiogram library to communicate with Telegram. It uses SQLite as the database. The bot stores and shows information about routes, stops, and taxi services.
+
+The main commands of the bot are:
+
+\begin{itemize}
+    \item \texttt{/start} -- shows a welcome message and main information;
+    \item \texttt{/help} -- shows all available commands;
+    \item \texttt{/marshrut <number>} -- shows stops for a selected route;
+    \item \texttt{/poisk <from> <to>} -- searches for a route between two stops;
+    \item \texttt{/taxi} -- shows taxi services and phone numbers;
+    \item \texttt{/dobavit} -- allows users to suggest new transport information.
+\end{itemize}
+
+The database has five main tables. These tables are routes, stops, route stops, taxi services, and users. The routes table stores route numbers and descriptions. The stops table stores stop names. The route stops table connects routes with stops. The taxi services table stores taxi names and phone numbers. The users table stores Telegram user identifiers for simple analytics.
+
+The system is developed as a minimum viable product. A minimum viable product, or MVP, is the first working version of a system. It includes the most important functions. In the scope of this bachelor thesis, the MVP approach is suitable because the goal is to build a working and testable system, not a large commercial platform.
+
+\textbf{Practical value of the study.}
+
+The practical value of this work is that the system can help public transport users in Fergana city. A user can open Telegram and send a command to the bot. The bot can answer with route, stop, or taxi information. This can save time for users.
+
+The system is also useful because it is low-cost. It does not need a separate mobile application. It does not need a complex database server. SQLite was chosen because the data volume is small and a separate database server is not needed. The bot can be hosted on a low-cost or free hosting service. This is important for a student project and for possible local use.
+
+The architecture also allows future improvement. The system can later include more routes, more stops, maps, an admin panel, and artificial intelligence. However, these functions are not part of the current implementation. They are discussed as future work.
+
+\textbf{Approbation of the study.}
+
+The results of the study were tested in a small pilot test with users from the student's personal network in Fergana. The users checked the main bot commands and gave simple feedback about usability and usefulness. The results of this test are used in Chapter 3 of the thesis.
+
+The work can also be presented during the bachelor thesis defence at Riga Nordic University. The defence will include the problem, aim, developed system, database structure, testing results, and future improvements.
+
+\textbf{Defended thesis.}
+
+The following defended thesis statements are proposed:
+
+\begin{enumerate}
+    \item Has been offered a new Telegram bot system for public transport information in Fergana city, based on Python and SQLite.
+    \item Has been modified the traditional approach of accessing transport information by moving it from offline sources to a 24/7 digital channel inside Telegram.
+    \item Has been suggested an extensible architecture that allows future integration with AI assistants for handling free-form questions.
+\end{enumerate}
+
+\textbf{Structure of the thesis.}
+
+The thesis consists of an introduction, four main chapters, conclusions, literature, and appendices.
+
+The introduction explains the topicality of the problem, aim, object, subject, research problem, tasks, hypothesis, methods, approbation, and defended thesis.
+
+Chapter 1 presents the literature review and theoretical background. It explains key concepts, related work, theoretical ideas, and the motivation for the chosen direction.
+
+Chapter 2 presents the case and system analysis. It describes the situation in Fergana city, the environment of the system, constraints, risks, and data collection methods.
+
+Chapter 3 presents the practical research. It describes the design and development of the Telegram bot, database structure, commands, screenshots, testing results, and evaluation.
+
+Chapter 4 discusses the results and future development. It presents possible improvements, feasibility, efficiency, and further development directions.
+
+Chapter 5 presents the conclusions. It explains how the aim was achieved, how the tasks were completed, and how the hypothesis was checked.

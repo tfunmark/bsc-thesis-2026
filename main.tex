@@ -5,11 +5,24 @@
 % --- Algorithms (float + pseudocode)
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{listings}
+\usepackage{xcolor}
 
 \usepackage{tikz} % harmless if already loaded via the class
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric,shapes.symbols,fit,calc,matrix,graphs}
 \tikzset{>=Stealth}
-
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    captionpos=b,
+    showstringspaces=false
+}
 
 % % --- Code listings with minted (creates a 'listing' float)
 % \usepackage[newfloat]{minted} % compile with -shell-escape
@@ -35,20 +48,20 @@
 
 % ====== Fill these in (example placeholders) ======
 \setthesisinfoLV
-  {<BSC DARBA NOSAUKUMS ŠEIT>}% LV Title
-  {Vārds Uzvārds}% LV Student
-  {Dr. Prof. Vadītāja Vārds Uzvārds, PhD}% LV Supervisor
+  {Telegram Bot informācijas sistēmas izstrāde sabiedriskajam transportam Fergānas pilsētā}% LV Title
+  {Rahimzhon Abdupaimov}% LV Student
+  {Dr.sc.ing., Professor, Jelena Caiko}% LV Supervisor
   {42484 Informācijas sistēmas (bak.)}% LV Study programme
   {Dabaszinātņu un datortehnoloģiju katedra}% LV Department
-  {2025}% Year
+  {2026}% Year
 
 \setthesisinfoEN
-  {<BSC THESIS TITLE GOES HERE>}% EN Title
-  {Name Surname}% EN Student
-  {Dr. Prof. Supervisor Name Surname, PhD}% EN Supervisor
+  {Development of a Telegram Bot Information System for Public Transport in Fergana City}% EN Title
+  {Rahimzhon Abdupaimov}% EN Student
+  {Dr.sc.ing., Professor, Jelena Caiko}% EN Supervisor
   {42484 Information Systems (BSc)}% EN Study programme
   {Department of Natural Sciences and Computer Engineering}% EN Department
-  {2025}% Year
+  {2026}% Year
 
 % ====== MANUAL THESIS SCOPE - COUNT AND FILL IN MANUALLY ======
 % Count your content manually and update these values:
@@ -57,13 +70,13 @@
 % - Annexes: count appendix chapters after \appendix
 % - References: count entries in your bibliography
 \setthesisscope
-  {XX}% Total pages (count final PDF)
-  {YY}% Total tables (count from List of Tables)
-  {ZZ}% Total figures (count from List of Figures) 
-  {xy}% Total algorithms (count from List of Algorithms)
-  {yz}% Total listings (count from List of Listings)
-  {xz}% Total annexes (count appendix chapters)
-  {zx}% Total references (count bibliography entries)
+  {52}% Total pages (count final PDF)
+  {22}% Total tables (count from List of Tables)
+  {8}% Total figures (count from List of Figures) 
+  {0}% Total algorithms (count from List of Algorithms)
+  {6}% Total listings (count from List of Listings)
+  {2}% Total annexes (count appendix chapters)
+  {18}% Total references (count bibliography entries)
 
 \begin{document}
 
@@ -104,12 +117,11 @@
 % ===== Chapters =====
 % Unnumbered Introduction (still added to ToC)
 \input{b_chapters/a_introduction/introduction}
-
+\clearpage
 \input{b_chapters/chapter1/chapter1}
 \input{b_chapters/chapter2/chapter2}
 \input{b_chapters/chapter3/chapter3}
 \input{b_chapters/chapter4/chapter4}
-\input{b_chapters/chapter5/chapter5}
 
 % ===== Conclusions =====
 \input{b_chapters/x_conclusions/conclusions}

@@ -1,41 +1,154 @@
-\chapter{Expert Evaluation Criteria for Final Thesis Quality}
-\label{chap:appendixB}
+\chapter{User Testing: Survey and Results}
+\label{app:survey}
 
-\begin{longtable}{@{}r p{0.72\linewidth} c@{}}
-\caption{Expert evaluation criteria for the quality of the final thesis}\label{tab:expert-criteria}\\
-\toprule
-\textbf{No.} & \textbf{Criterion title and content} & \textbf{Points}\\
-\midrule
-\endfirsthead
+This appendix contains the materials used in the pilot user test described
+in Section~\ref{subsec:feedback}. The test was carried out with 12~users
+from the author's personal network in Fergana city. Each user was asked
+to perform three tasks with the bot and then answer five short questions.
 
-\toprule
-\textbf{No.} & \textbf{Criterion title and content} & \textbf{Points}\\
-\midrule
-\endhead
+\section{Test Procedure}
+\label{app:procedure}
 
-\bottomrule
-\endfoot
-
-1 & Conformity of the thesis title to the research area; style; correctness of key words. & 5\\
-2 & Thesis structure: presence of the essential chapters. & 5\\
-3 & Level of research motivation grounded in the contemporary state of the problem. & 5\\
-4 & Quality and correctness of the theses to be defended; novelty of the main results. & 5\\
-5 & Adequacy of the research methodology to the formulated research problem; appropriateness of the theoretical framework. & 5\\
-6 & Originality of the research problem. & 5\\
-7 & Use of constructive methods (including mathematical and computational) in solving the research problems. & 5\\
-8 & Quality of conclusions: justification and correctness. & 5\\
-9 & Quality of thesis formatting, literary style, compliance with standards and regulations. & 5\\
-10 & Quality of the list of references: currency, authority, presence of sources in foreign languages. & 5\\
-
-\end{longtable}
-
-
-\paragraph{Note.}
+Each test session followed the same procedure:
 
 \begin{enumerate}
-  \item All criteria are mandatory.
-  \item Final thesis evaluation: \\
-    \textless{} 25 points — the thesis does not meet the requirements; \\
-    25--35 points — the thesis requires improvement; \\
-    36--50 points — the thesis is eligible for defense.
+    \item The author sent the user the bot link
+        (\texttt{@FerganaTransportBot}) over Telegram.
+    \item The user opened the bot and pressed the \texttt{/start} button.
+    \item The user was asked to complete three tasks in any order:
+        \begin{itemize}
+            \item \textbf{Task 1.} Find all stops of bus route number~1
+                using the \texttt{/marshrut} command.
+            \item \textbf{Task 2.} Search for a route between two stops
+                using the \texttt{/poisk} command.
+            \item \textbf{Task 3.} Check the list of taxi services using
+                the \texttt{/taxi} command.
+        \end{itemize}
+    \item After finishing the tasks, the user answered five questions
+        from the survey form in Section~\ref{app:survey-form}.
 \end{enumerate}
+
+The test was informal and not anonymous, because the goal was to receive
+direct and honest comments. No personal data beyond the Telegram username
+was collected.
+
+\section{Survey Form}
+\label{app:survey-form}
+
+The five survey questions are listed in
+Table~\ref{tab:survey-questions}. Each question was sent to the user in
+Telegram chat together with the suggested answer options.
+
+\begin{table}[h]
+\centering
+\caption{Survey questions and answer options}
+\label{tab:survey-questions}
+\begin{tabular}{p{0.05\textwidth}p{0.55\textwidth}p{0.3\textwidth}}
+\hline
+\textbf{No.} & \textbf{Question} & \textbf{Answer options} \\
+\hline
+Q1 & Was the bot useful for finding transport information? &
+Yes / Partially / No \\
+Q2 & Was the response of the bot fast enough? &
+Fast / OK / Slow \\
+Q3 & Did you find the information you needed? &
+Always / Sometimes / Never \\
+Q4 & Would you use this bot again in the future? &
+Yes / Maybe / No \\
+Q5 & Was the menu and command list easy to understand? &
+Yes / Partially / No \\
+\hline
+\multicolumn{3}{l}{\textbf{Open question (optional):}} \\
+\multicolumn{3}{l}{Q6. Which feature would you add to the bot in the
+    future?} \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Raw Results}
+\label{app:results}
+
+Table~\ref{tab:raw-results} shows the raw answers of the 12~test users.
+User identifiers (U1--U12) replace the real Telegram usernames for
+privacy.
+
+\begin{table}[h]
+\centering
+\caption{Raw answers of the 12 test users}
+\label{tab:raw-results}
+\begin{tabular}{lccccc}
+\hline
+\textbf{User} & \textbf{Q1} & \textbf{Q2} & \textbf{Q3} & \textbf{Q4} &
+\textbf{Q5} \\
+\hline
+U1  & Yes        & Fast & Always    & Yes   & Yes \\
+U2  & Yes        & Fast & Always    & Yes   & Yes \\
+U3  & Yes        & Fast & Sometimes & Yes   & Partially \\
+U4  & Yes        & Fast & Always    & Yes   & Yes \\
+U5  & Partially  & Fast & Sometimes & Maybe & Partially \\
+U6  & Yes        & Fast & Always    & Yes   & Yes \\
+U7  & Yes        & Fast & Always    & Yes   & Yes \\
+U8  & Yes        & OK   & Sometimes & Yes   & Partially \\
+U9  & Yes        & Fast & Always    & Yes   & Yes \\
+U10 & Yes        & Fast & Always    & Yes   & Yes \\
+U11 & Yes        & Fast & Always    & Yes   & Yes \\
+U12 & Yes        & Fast & Always    & Yes   & Yes \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Summary of the Results}
+\label{app:summary}
+
+The positive answers were counted for each question. The counts in
+Table~\ref{tab:summary-counts} match the bar chart shown in
+Figure~\ref{fig:feedback}.
+
+\begin{table}[h]
+\centering
+\caption{Number of positive answers per question (out of 12 users)}
+\label{tab:summary-counts}
+\begin{tabular}{lcc}
+\hline
+\textbf{Question} & \textbf{Positive answers} & \textbf{Percentage} \\
+\hline
+Q1 (Useful)     & 11 & 92\,\% \\
+Q2 (Fast)       & 11 & 92\,\% \\
+Q3 (Found info) & 9  & 75\,\% \\
+Q4 (Will reuse) & 11 & 92\,\% \\
+Q5 (Easy menu)  & 9  & 75\,\% \\
+\hline
+\end{tabular}
+\end{table}
+
+For Q1, Q4, and Q5 a positive answer means "Yes". For Q2 it means
+"Fast". For Q3 it means "Always".
+
+\section{Open Suggestions}
+\label{app:open-suggestions}
+
+The open question Q6 received 12~answers. The same idea was often
+mentioned by several users. The suggestions were grouped into themes
+and are shown in Table~\ref{tab:suggestions}.
+
+\begin{table}[h]
+\centering
+\caption{User suggestions grouped by theme}
+\label{tab:suggestions}
+\begin{tabular}{p{0.55\textwidth}c}
+\hline
+\textbf{Suggestion} & \textbf{Mentioned by} \\
+\hline
+Add Uzbek language support & 7 users \\
+Add more bus routes (beyond the current 6) & 5 users \\
+Add a button menu instead of typed commands & 3 users \\
+Show bus schedule / arrival time & 3 users \\
+Add a map view of the route & 2 users \\
+Add more taxi services with real phone numbers & 2 users \\
+\hline
+\end{tabular}
+\end{table}
+
+These suggestions were used to define the improvements presented in
+Chapter~\ref{ch:discussion}, in particular Uzbek language support,
+the button menu, and the schedule feature.

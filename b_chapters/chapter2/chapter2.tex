@@ -1,93 +1,196 @@
-\chapter{Case / System Analysis (Example Chapter~2)}
-\label{chap:analysis}
+\chapter{Case Analysis: Public Transport in Fergana City}
+\label{ch:case}
+\label{ch:analysis}
 
-% --- IMPORTANT NOTE FOR STUDENTS ---
-% This is only a suggested structure and sample content.
-% You are free to modify, reorder, merge, or rename sections
-% if it makes sense for your topic — as long as your supervisor agrees.
+This chapter analyses the case city of the thesis. It describes the
+city of Fergana, its public transport system, the main problems faced
+by passengers, and the requirements for a digital information service.
+The chapter creates the practical context for the system that is
+designed and built in Chapter~\ref{ch:empirical}.
 
-This chapter often provides a structured analysis of the case, dataset, or system that your thesis investigates.  
-However, its scope and layout depend heavily on the chosen topic. Some theses merge this part into the empirical chapter; others expand it into multiple chapters.  
-Think of the following sections as \emph{examples}, not as mandatory rules.
+\section{City Profile and Transport Context}
+\label{sec:city-profile}
 
-\section{General Characteristics of the Case / System (Example Section)}
-\label{sec:case}
-Here you may describe the case or system under study (e.g., an IT application, dataset, algorithm, protocol, or infrastructure).  
-Mention background, design, stakeholders, or technical architecture.  
+Fergana is a regional capital in the east of Uzbekistan with a
+population of approximately 300{,}000 people \cite{stat_uz_fergana}.
+The city is the administrative and economic centre of the Fergana
+Valley, one of the most densely populated regions in Central Asia. Daily
+mobility in the city depends mostly on public buses and shared taxis.
+Private cars are common but not the main mode of transport for
+students, pensioners, and low-income groups.
 
-\paragraph{Note.} Adapt the level of detail to your project.  
-If your work is purely theoretical, this section can be shorter. If it is applied to a concrete system or dataset, give enough context so the reader understands what is being studied.
+Public bus transport in Fergana is operated by several local carriers.
+There is no single official operator that publishes a complete schedule
+or a digital map of routes. Information about routes is shared mostly
+through signs on buses, word of mouth, and unofficial posts in social
+networks. General map services such as Yandex Maps cover only a part of
+the local routes and do not provide reliable real-time data.
 
-\section{Analysis of Internal and External Environment (Optional Example)}
-\label{sec:env}
-Depending on your topic, you might include a structured breakdown of the system.  
-Possible angles include (choose those that fit, or invent your own):
+\section{Identified Problems}
+\label{sec:problems}
 
-\begin{itemize}[leftmargin=1.2cm]
-  \item \textbf{Architecture.} Components, modules, services, or data pipelines.
-  \item \textbf{Performance.} Scalability, latency, throughput, bottlenecks.
-  \item \textbf{Security and reliability.} Threats, vulnerabilities, resilience.
-  \item \textbf{External factors.} Standards, APIs, dependencies, regulations.
-\end{itemize}
+During informal observation and conversations with local residents, the
+author identified several recurring problems with the current state of
+public transport information in Fergana. These problems are
+summarised in Table~\ref{tab:problems}.
 
-Support your analysis with diagrams, tables, or references if relevant.
-
-% --- Example figure (replace or remove) ---
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.65\linewidth]{b_chapters/chapter1/assets/RNU_large_logo.png}
-  \figsource{Replace with your own system diagram (if needed).}
-  \caption{Example system architecture diagram.}
-  \label{fig:analysis-example}
-\end{figure}
-
-% --- Example table (replace or remove) ---
-{\singlespacing
-\begin{table}[h]
-  \caption{Example system metrics (dummy data)}
-  \label{tab:analysis-example}
-  \centering
-  \begin{tabular}{lrr}
-    \toprule
-    Metric & Baseline value & Target value \\
-    \midrule
-    Response time (ms)  & 240   & 120   \\
-    Uptime (\%)         & 97.5  & 99.9  \\
-    Requests / second   & 350   & 1000  \\
-    \bottomrule
-  \end{tabular}
+\begin{table}[H]
+\centering
+\caption{Main problems of public transport information in Fergana}
+\label{tab:problems}
+\begin{tabular}{p{0.30\linewidth} p{0.62\linewidth}}
+\hline
+\textbf{Problem} & \textbf{Description} \\
+\hline
+No official application & The city has no official mobile or web
+application for public transport. \\
+Incomplete map data & Yandex Maps covers only some routes; many local
+buses are missing. \\
+No published schedules & Bus arrival times are not published in any
+digital form. \\
+Language barrier for visitors & Stop names and route information are
+mostly in Russian and Uzbek, which is hard for tourists. \\
+Difficulty for new residents & Students and newcomers do not know which
+bus goes where. \\
+Low digital skills in some groups & Older users find complex
+applications difficult. \\
+\hline
+\end{tabular}
 \end{table}
-}
 
-\section{Context, Constraints, and Risks (Optional)}
-\label{sec:constraints}
-In some topics, it is useful to state the limitations and boundary conditions that affect your system. Examples:
+These problems show that the gap is not in the transport itself but in
+the \emph{information layer} around it. Buses exist and operate every
+day, but the knowledge of routes and stops is not stored in a single,
+accessible digital place.
 
-\begin{itemize}[leftmargin=1.2cm]
-  \item Technical constraints (hardware, data availability, standards compliance).
-  \item Research constraints (time, scope, access rights).
-  \item Risks (privacy, security, reliability, scalability challenges).
+\section{Why Telegram}
+\label{sec:why-telegram}
+
+Telegram is one of the most used messengers in Uzbekistan. According to
+public reports, Telegram is among the top platforms by daily active
+users in the country, together with Instagram and WhatsApp
+\cite{datareportal_uz_2024}. Many local businesses, news channels, and
+even government services already use Telegram bots and channels to
+reach citizens.
+
+For a public transport information system, Telegram has several
+practical advantages:
+
+\begin{itemize}
+  \item \textbf{Low entry barrier.} Users do not need to install a new
+  application. They already have Telegram on their phones.
+  \item \textbf{Low data usage.} A text-based bot uses very little
+  mobile data, which is important for users with limited internet
+  plans.
+  \item \textbf{Works on weak devices.} Telegram works well on older
+  Android phones, which are common in the region.
+  \item \textbf{Free Bot API.} The Telegram Bot API is free and well
+  documented \cite{telegram_botapi}, which removes the cost barrier
+  for a student project.
+  \item \textbf{Familiar interface.} Users already know how to send
+  messages, which reduces the need for training.
 \end{itemize}
 
-This subsection can be skipped if not relevant.
+A native mobile application (Android/iOS) could also solve the same
+problem, but it would require app store accounts, separate code bases
+for two platforms, and a higher technical skill from users. A web
+application would require users to remember a URL and open a browser.
+A Telegram bot avoids these issues.
 
-\section{Data and Methods for the Analysis (Example)}
-\label{sec:datamethods}
-Briefly outline what data and methods you are using here.  
-Examples: logs, benchmark datasets, architectural specifications, monitoring tools.  
-Methods could include profiling, simulation, descriptive statistics, or qualitative inspection.  
-Adapt this to your project; the goal is only to show that your analysis has a methodological basis.
+\section{Stakeholders and User Groups}
+\label{sec:stakeholders}
 
-\section{Sub-Conclusions (for Chapter~2)}
-\label{sec:subconcl}
-End with a short synthesis (typically 1–3 paragraphs).  
-Example points to cover:
+The system has several types of users. They are described in
+Table~\ref{tab:users}.
 
-\begin{itemize}[leftmargin=1.2cm]
-  \item What the analysis revealed (main technical insights).
-  \item Which constraints/risks are most critical for your research.
-  \item How this motivates the next step (empirical study in Chapter~\ref{chap:empirical}).
+\begin{table}[H]
+\centering
+\caption{Main user groups of the proposed system}
+\label{tab:users}
+\begin{tabular}{p{0.25\linewidth} p{0.30\linewidth} p{0.37\linewidth}}
+\hline
+\textbf{User group} & \textbf{Main need} & \textbf{Typical query} \\
+\hline
+Local residents & Daily commute information & ``Which bus goes from
+home to the market?'' \\
+Students & Routes to university and dormitories & ``How to get from
+Istiqlol to the city centre?'' \\
+Newcomers and visitors & Basic orientation in the city & ``What buses
+stop near the airport?'' \\
+Older users & Simple, text-based help & ``Show me the stops of bus 1.''
+\\
+\hline
+\end{tabular}
+\end{table}
+
+All groups share one common need: a \emph{simple way to ask a question
+in text form and get a clear answer}. This need is the main driver of
+the system design in Chapter~\ref{ch:empirical}.
+
+\section{Functional Requirements}
+\label{sec:requirements}
+
+Based on the problems and user groups above, the following functional
+requirements were defined for the system. They are listed in
+Table~\ref{tab:reqs}.
+
+\begin{table}[H]
+\centering
+\caption{Functional requirements of the Fergana Transport Bot}
+\label{tab:reqs}
+\label{tab:fr}  
+\begin{tabular}{p{0.10\linewidth} p{0.32\linewidth} p{0.50\linewidth}}
+\hline
+\textbf{ID} & \textbf{Requirement} & \textbf{Description} \\
+\hline
+FR-1 & Show route stops & The bot must show the list of stops for a
+selected bus route. \\
+FR-2 & Search route between stops & The bot must find a route between
+two stop names entered by the user. \\
+FR-3 & Provide taxi information & The bot must show contacts of local
+taxi services as an alternative. \\
+FR-4 & Collect user suggestions & The bot must accept new transport
+information from users for future updates. \\
+FR-5 & Help and command list & The bot must show a list of commands
+and short usage examples. \\
+FR-6 & 24/7 availability & The bot must be hosted on a cloud platform
+and respond at any time. \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Non-Functional Requirements}
+\label{sec:nfr}
+
+In addition to functional requirements, the system must meet several
+non-functional requirements:
+
+\begin{itemize}
+  \item \textbf{Usability.} Commands must be short and easy to remember.
+  Examples must be shown in the help message.
+  \item \textbf{Performance.} The bot must answer in less than two
+  seconds under normal load.
+  \item \textbf{Reliability.} The bot must restart automatically after
+  a server reboot.
+  \item \textbf{Low cost.} The system must run on a free or low-cost
+  hosting plan to stay sustainable for a student project.
+  \item \textbf{Maintainability.} Route and stop data must be stored in
+  a database that can be updated without changing the code.
 \end{itemize}
 
-\paragraph{Reminder.} This subsection is not meant to repeat the whole chapter — just connect the dots and prepare for the next one.
+\section{Chapter Summary}
+\label{sec:ch2-summary}
 
+This chapter described the case city of Fergana and the current state
+of its public transport information. The city has no official digital
+information service. General map applications cover only part of the
+routes. Several user groups -- residents, students, visitors, and
+older people -- need a simple way to get transport information in text
+form.
+
+Telegram was chosen as the platform because it is widely used in
+Uzbekistan, has a free Bot API, low data usage, and a familiar
+interface. Based on the identified problems and user groups, six
+functional and five non-functional requirements were defined. These
+requirements form the basis of the system design and implementation,
+which are presented in Chapter~\ref{ch:empirical}.

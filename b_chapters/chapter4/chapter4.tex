@@ -1,67 +1,335 @@
-\chapter{Discussion and Development (Example Chapter~4)}
-\label{chap:discussion}
+\chapter{Discussion and Development}
+\label{ch:discussion}
 
-% --- IMPORTANT NOTE FOR STUDENTS ---
-% This chapter is optional and highly flexible.
-% Some theses combine discussion with results (Chapter~3).
-% Others use it to present proposals, improvements, or an evaluation.
-% Always adapt the content/structure to your project and check with your supervisor.
+This chapter discusses the results of the practical work presented in
+Chapter~\ref{ch:development}. It compares the developed bot with similar
+existing solutions, proposes a set of improvements for future versions, and
+evaluates the feasibility of the system in terms of cost and scalability.
+The chapter ends with sub-conclusions that lead to the final Conclusions of
+the thesis.
 
-This chapter may serve several possible purposes depending on the nature of your work:  
-(1) discuss your empirical findings in more depth,  
-(2) compare results against theory or prior work,  
-(3) propose improvements, models, or design solutions, or  
-(4) evaluate feasibility or efficiency.  
-If your project is small-scale or self-contained, you may skip this chapter and move directly to the Conclusions.
+\section{Extended Discussion}
+\label{sec:extended-discussion}
 
-\section{Extended Discussion (Optional Example Section)}
-\label{sec:discussion-extended}
-Here you may reflect more deeply on your results than in Chapter~\ref{chap:empirical}.  
-Possible angles include:
+The results from Chapter~\ref{ch:development} show that even a small
+Telegram bot with a manually collected dataset can solve a real daily
+problem for Fergana residents. This section reflects on these results from
+three different angles: comparison with related work, the role of the
+manual data approach, and the lessons learned during the development.
 
-\begin{itemize}[leftmargin=1.2cm]
-  \item Comparing results with other studies or benchmarks.  
-  \item Highlighting unexpected patterns or anomalies.  
-  \item Theoretical implications: how your findings support or contradict existing models.  
-\end{itemize}
+\subsection{Comparison with Related Work}
+\label{subsec:comparison}
 
-\paragraph{Tip.} If your work is primarily an implementation, you may instead use this section to evaluate design trade-offs, architectural choices, or lessons learned.
+Chapter~\ref{ch:literature} reviewed several public transport information
+tools, including mobile applications, web services, map platforms (such as
+Yandex Maps), and messaging bots. Table~\ref{tab:comparison-discussion}
+compares these tools with the developed Fergana Transport Bot from a
+practical point of view.
 
-\section{Proposals / Improvements (Optional Example Section)}
+\begin{table}[h]
+\centering
+\caption{Practical comparison of public transport information tools}
+\label{tab:comparison-discussion}
+\begin{tabular}{lccc}
+\hline
+\textbf{Feature} & \textbf{Mobile app} & \textbf{Yandex Maps} &
+\textbf{Fergana Bot} \\
+\hline
+Installation required & yes & yes & no \\
+Works inside Telegram & no & no & yes \\
+Full coverage of Fergana routes & rare & partial & yes (six routes) \\
+Free for the user & varies & yes & yes \\
+Development cost & high & --- & low \\
+Update by maintainer & app store & company & direct (SQLite) \\
+Offline word-of-mouth replacement & possible & possible & yes \\
+\hline
+\end{tabular}
+\end{table}
+
+The comparison shows that the bot is not the most powerful tool in absolute
+terms. A mobile application can offer richer features such as maps and
+push notifications. Yandex Maps can provide visual navigation. However,
+the bot has clear practical advantages for the specific context of
+Fergana: it requires no installation, it covers local routes that Yandex
+Maps misses, and it can be updated quickly by the maintainer without
+publishing a new release.
+
+\subsection{The Manual Data Approach as a Strength}
+\label{subsec:manual-data}
+
+At the start of the project, the manual collection of route data was seen
+as a weakness, because no official open data was available. After
+completing the development, this approach turned out to be a strength for
+three reasons.
+
+First, the manual approach forced the author to verify each stop and each
+route number with real users from Fergana. This gave the dataset a high
+local accuracy that an automatic import from a public API could not
+guarantee.
+
+Second, the structured SQLite database makes future updates easy. New
+routes can be added without changing the code. This is important in a
+city where bus routes can change without official announcement.
+
+Third, the manual approach is reproducible for other regional cities of
+Uzbekistan. A student or a small team can collect data in a similar way
+for another city and reuse the same bot code.
+
+\subsection{Lessons Learned}
+\label{subsec:lessons}
+
+Several lessons emerged during the development. They are summarized in
+Table~\ref{tab:lessons}.
+
+\begin{table}[h]
+\centering
+\caption{Lessons learned from the development of the bot}
+\label{tab:lessons}
+\begin{tabular}{p{0.32\textwidth}p{0.6\textwidth}}
+\hline
+\textbf{Lesson} & \textbf{Explanation} \\
+\hline
+Examples are essential & Test users could not use \texttt{/poisk} until a
+clear example was shown in the help message. \\
+Buttons feel safer than commands & Several users asked for a button menu
+because typed commands felt risky for them. \\
+Data quality is harder than code & Writing the bot was faster than
+collecting and cleaning the route data. \\
+Async pays off only at scale & With 12 test users, async support was not
+needed, but it will be needed when the bot is published. \\
+Small scope is a strength & A focused MVP was easier to defend than an
+ambitious half-finished system. \\
+\hline
+\end{tabular}
+\end{table}
+
+These lessons match a wider theoretical observation: chat bots can
+replace simple mobile applications for information delivery in regional
+cities, especially when development resources are limited. \cite{adamopoulou2020chatbots, kamberi2021telegram}
+
+\section{Proposals and Improvements}
 \label{sec:proposals}
-In many IT theses, the contribution is not only empirical but also practical.  
-Here you can suggest:
 
-\begin{itemize}[leftmargin=1.2cm]
-  \item Proposed system modifications or design improvements.  
-  \item Prototype features, extensions, or optimizations.  
-  \item Conceptual models or frameworks based on your findings.  
+This section proposes a set of improvements for future versions of the
+Fergana Transport Bot. The improvements are ordered by priority. The
+proposed extended architecture is shown in
+Figure~\ref{fig:extended-arch}.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    node distance=1.1cm and 0.9cm,
+    box/.style={rectangle, draw, minimum width=2.2cm, minimum height=0.9cm,
+        align=center, font=\small},
+    new/.style={rectangle, draw, dashed, minimum width=2.2cm,
+        minimum height=0.9cm, align=center, font=\small, fill=green!8},
+    db/.style={cylinder, draw, shape border rotate=90, aspect=0.3,
+        minimum width=1.8cm, minimum height=1cm, align=center, font=\small},
+    arrow/.style={->, >=Stealth, thick}
+]
+    \node[box] (user) {User};
+    \node[box, right=of user] (tg) {Telegram};
+    \node[box, right=of tg] (bot) {Python Bot\\(aiogram)};
+    \node[db, right=of bot] (db) {SQLite};
+
+    \node[new, below=of tg] (uz) {Uzbek\\language};
+    \node[new, below=of bot] (ai) {AI assistant\\(Grok / GPT)};
+    \node[new, below=of db] (admin) {Web admin\\panel};
+
+    \draw[arrow] (user) -- (tg);
+    \draw[arrow] (tg) -- (bot);
+    \draw[arrow] (bot) -- (db);
+    \draw[arrow, dashed] (tg) -- (uz);
+    \draw[arrow, dashed] (bot) -- (ai);
+    \draw[arrow, dashed] (db) -- (admin);
+\end{tikzpicture}
+\caption{Extended architecture with proposed improvements (dashed = future)}
+\label{fig:extended-arch}
+\end{figure}
+
+\subsection{Improvement 1: Uzbek Language Support}
+\label{subsec:uzbek}
+
+The most common request from test users was to add an Uzbek language
+version of the bot. The current version supports only Russian and English
+commands. Many Fergana residents speak Uzbek as the first language. Adding
+Uzbek support would increase the audience of the bot significantly.
+
+The technical work for this improvement is small. The texts of the bot
+replies can be moved to a separate dictionary file. A new
+\texttt{/language} command can let the user select the preferred language.
+The database does not need any change for this feature.
+
+\subsection{Improvement 2: Button Menu (Reply Keyboard)}
+\label{subsec:buttons}
+
+Three test users asked for a button menu instead of typed commands. The
+aiogram library supports reply keyboards out of the box. Adding a keyboard
+with buttons such as \textit{Routes}, \textit{Search}, \textit{Taxi}, and
+\textit{Help} would make the bot easier to use for people who are not
+familiar with command-line style interfaces.
+
+\subsection{Improvement 3: AI Assistant Integration}
+\label{subsec:ai}
+
+The current bot understands only fixed commands. If the user writes a
+free-form question, the bot replies with an "unknown command" message
+(see Figure~\ref{fig:botpoisk} in Chapter~\ref{ch:development}). A
+practical improvement is to connect the bot with an AI assistant such as
+Grok or GPT.
+
+The integration would work as follows. When the bot receives a message
+that does not match any known command, it would send the message to the
+AI assistant together with a short context about the available routes
+and stops. The AI assistant would then generate a free-form answer. The
+answer would be returned to the user inside Telegram.
+
+This improvement was intentionally moved to future work. The reason is
+that AI assistant integration adds external dependencies, possible API
+costs, and a new layer of testing. In the scope of this bachelor thesis,
+a focused MVP without AI was a more realistic goal.
+
+\subsection{Improvement 4: Web Admin Panel}
+\label{subsec:admin}
+
+The current version of the bot is updated by editing the SQLite database
+directly. This is acceptable for a single maintainer but not for a small
+team. A simple web admin panel built with a framework such as Flask or
+FastAPI would let several maintainers add new routes, edit stop names,
+and approve user suggestions from the \texttt{/dobavit} command.
+
+\subsection{Improvement 5: Push Notifications and Schedules}
+\label{subsec:push}
+
+Several test users assumed that the bot would know the schedule of buses.
+The current version does not include schedules because no public schedule
+data exists in Fergana. If a schedule is collected in the future (for
+example, with the help of local transport companies), it can be added to
+the database and used for two new features:
+
+\begin{itemize}
+    \item A \texttt{/schedule <route>} command that shows the next
+        departures.
+    \item Push notifications to users who subscribed to a specific route.
 \end{itemize}
 
-Illustrate with diagrams, mockups, or tables if useful. Remember: these are suggestions, not required elements.
+\subsection{Improvement 6: GPS-Based Features}
+\label{subsec:gps}
 
-\section{Evaluation of Feasibility / Efficiency (Optional Example Section)}
-\label{sec:evaluation}
-Sometimes it makes sense to estimate how well your proposal would work in practice.  
-Examples:
+If transport companies in Fergana publish GPS data of their vehicles in
+the future, the bot can use this data to show the live position of a bus
+and estimate the waiting time at a stop. This improvement is the most
+demanding from a technical point of view but also the most valuable from
+the user's point of view.
 
-\begin{itemize}[leftmargin=1.2cm]
-  \item Performance evaluation (e.g., runtime, memory use, scalability).  
-  \item Cost/benefit trade-offs (time, resources, usability).  
-  \item Risks and limitations of implementation.  
-\end{itemize}
+\section{Evaluation of Feasibility and Efficiency}
+\label{sec:feasibility}
 
-This section can be skipped if it does not apply to your project.
+This section evaluates the feasibility of the bot at the current scale and
+at a larger scale. The evaluation is divided into three parts: cost
+analysis, performance scalability, and risks of expansion.
 
-\section{Sub-Conclusions (for Chapter~4)}
-\label{sec:subconcl4}
-Close with a short synthesis that ties together the discussion and proposals.  
-Example points:
+\subsection{Cost Analysis}
+\label{subsec:cost}
 
-\begin{itemize}[leftmargin=1.2cm]
-  \item What your deeper reflection adds beyond the raw results.  
-  \item Which improvements or models are most promising.  
-  \item How these insights prepare the way for the \textbf{Conclusions chapter}.  
-\end{itemize}
+The current cost of running the bot is zero. The free tier of
+PythonAnywhere provides enough resources for up to about 1000 active users
+per day. The estimated cost at larger scales is shown in
+Table~\ref{tab:cost}. The values are based on the published pricing of
+common cloud providers in 2026.
 
-\paragraph{Reminder.} The “big picture” statements — confirmation of tasks, validation of the hypothesis, and achievement of the aim — belong in the \textbf{Conclusions chapter}, not here.
+\begin{table}[h]
+\centering
+\caption{Estimated hosting cost at different scales}
+\label{tab:cost}
+\begin{tabular}{lll}
+\hline
+\textbf{Scale} & \textbf{Hosting plan} & \textbf{Estimated cost} \\
+\hline
+Up to 1\,000 users / day & PythonAnywhere free & USD 0 / month \\
+Up to 10\,000 users / day & PythonAnywhere Hacker & USD 5 / month \\
+Up to 100\,000 users / day & Small VPS (1 vCPU, 2~GB) & USD 10--20 / month \\
+City-level deployment & Managed VPS + backups & USD 30--50 / month \\
+\hline
+\end{tabular}
+\end{table}
+
+For comparison, the development cost of a native mobile application with
+the same functionality would be much higher. Even a small team would
+spend several thousand US dollars and several months to publish an
+application on the Google Play and Apple App Store. The Telegram bot
+avoids both the development cost and the store publishing process.
+
+\subsection{Performance Scalability}
+\label{subsec:scalability}
+
+The bot is currently designed for a small load. The asynchronous design
+of aiogram allows it to handle many users without code changes. However,
+SQLite has a known limit at high write rates. If the number of users
+grows above a few thousand active users per day, the database should be
+migrated from SQLite to PostgreSQL. This migration is straightforward
+because the data model is simple and the bot uses standard SQL queries.\cite{kreibich2010sqlite, sqlite_docs}
+
+The Telegram Bot API also has a rate limit of approximately 30~messages
+per second to different users. For a single bot, this limit is high
+enough for tens of thousands of users per day under normal load.\cite{telegram_botapi}
+
+\subsection{Risks of Expansion}
+\label{subsec:risks}
+
+The main risks of expanding the bot are summarized in
+Table~\ref{tab:risks}.
+
+\begin{table}[h]
+\centering
+\caption{Risks of expanding the bot to a larger user base}
+\label{tab:risks}
+\begin{tabular}{p{0.32\textwidth}p{0.6\textwidth}}
+\hline
+\textbf{Risk} & \textbf{Mitigation} \\
+\hline
+Outdated route data & Add a web admin panel and accept verified user
+suggestions through \texttt{/dobavit}. \\
+Server downtime & Move to paid hosting with backups and a status
+monitor. \\
+SQLite write bottleneck & Migrate to PostgreSQL when daily active
+users exceed a few thousand. \\
+AI integration costs & Use rate limiting and a per-user daily quota for
+AI requests. \\
+Privacy of user data & Store only the Telegram identifier and the
+preferred language; nothing else. \\
+\hline
+\end{tabular}
+\end{table}
+
+Each risk has a clear and low-cost mitigation. None of the risks blocks
+the expansion of the bot to a larger user base.
+
+\section{Sub-Conclusions}
+\label{sec:ch4-subconclusions}
+
+This chapter discussed the results of the practical work, proposed six
+improvements for future versions of the bot, and evaluated the
+feasibility of the system at different scales.
+
+The comparison with related work showed that the Fergana Transport Bot is
+not the most powerful tool, but it is the most practical solution for the
+specific context of Fergana city. The manual data collection approach,
+seen as a weakness at the start, turned out to be a strength because of
+its local accuracy and reproducibility.
+
+The most promising improvement is the integration with an AI assistant
+such as Grok or GPT, because it removes the limitation of fixed commands.
+The most accessible improvement is the addition of Uzbek language
+support, because it requires only small code changes and would expand the
+user base significantly.\cite{dale2016return}
+
+The cost analysis showed that the bot can grow from zero cost to a small
+monthly fee even at city-level scale. The performance scalability is
+acceptable for tens of thousands of users with minimal changes. All
+identified risks have low-cost mitigations.
+
+These insights show that the developed system is not only a working MVP
+but also a realistic starting point for a larger transport information
+service. The achievement of the aim and the validation of the hypothesis
+are summarized in the next chapter.
